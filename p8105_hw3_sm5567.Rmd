@@ -119,7 +119,9 @@ instacart |>
 
 ### Problem 2
 
+
 his problem uses the BRFSS data. DO NOT include this dataset in your local data directory; instead, load the data from the p8105.datasets package using
+
 
 ## Loading the package for problem 2.
 ```{r}
@@ -138,21 +140,30 @@ brffs_smart2010_df=
   mutate(response = factor(response, levels = c("Poor", "Fair", "Good", "Very Good", "Excellent"), ordered = TRUE))
 ```
 
+
 ## States observed at 7 or more locations in 2002 and 2010.
 ```{r}
 brffs_smart2010_df %>%
   filter(year %in% c(2002, 2010)) %>% 
   group_by(year, locationabbr) %>%
   summarize(n_obs = n()) %>%
-  filter(n >= 7) %>%
-  arrange(year, desc(n))
+  filter(n_obs >= 7) %>%
+  arrange(year, desc(n_obs))
 ```
 
-* Construct a dataset that is limited to Excellent responses, and contains, year, state, and a variable that averages the data_value across locations within a state.
 
+## Construct a dataset that is limited to Excellent responses, and contains, year, state, and a variable that averages the data_value across locations within a state.
 ```{r}
-
+excellent_data =
+  brfss_smart2010 %>%
+  filter(Response %in% c("Excellent")) %>%
+  select(Year, Locationabbr, Data_value) %>%
+  group_by(Locationabbr, Year) %>%
+  mutate(avg_data_value = mean(Data_value)) %>%
+  select(Year, Locationabbr, avg_data_value) %>%
+  distinct()
 ```
+
 
 
 
