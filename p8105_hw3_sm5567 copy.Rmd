@@ -1,6 +1,6 @@
 ---
-title: "Homework 3 solutions"
-author: "Jeff Goldsmith"
+title: "Homework 3"
+author: "Shina Min"
 date: '`r format(Sys.time(), "%Y-%m-%d")`'
 output: github_document
 
@@ -164,12 +164,32 @@ excellent_data =
   distinct()
 ```
 
+* In 2002, PA, MA, NJ, CT, FL, NC (total of 6 states) were observed at 7 or more locations. In 2010, total of 14 states were observed at 7 or more locations, including FL, NJ, TX, CA, MD, NC, NE, WA, MA, NY, OH, CO, PA, SC.
 
+## Making a "spaghetti" plot
 
-
-
-* Make a “spaghetti” plot of this average value over time within a state (that is, make a plot showing a line for each state across years – the geom_line geometry and group aesthetic will help).
-
+```{r}
+excellent_data %>%
+  ggplot(aes(x = Year, y = avg_data_value, color = Locationabbr)) +
+  geom_line() +
+  labs(title = "Average Value of 'Excellent' Responses Over Time", x = "Year", y = "Average Value") +
+  theme_minimal()
+```
 
 * Make a two-panel plot showing, for the years 2006, and 2010, distribution of data_value for responses (“Poor” to “Excellent”) among locations in NY State.
+
+## Making a two-panel plot
+```{r}
+brfss_smart2010 %>%
+  select(Year, Data_value, Locationabbr, Locationdesc, Response) %>%
+  filter(
+    Year %in% c(2006, 2010),
+    Locationabbr == "NY") %>% 
+  ggplot(aes(x = Data_value, fill = Response)) +
+  geom_boxplot(alpha = 0.5) +
+  labs(title = "Distribution of Data_value in NY State (2006 & 2010)",
+       x = "Data Value", y = "Response") +
+  theme_minimal() +
+  facet_grid(. ~ Year)
+```
 
