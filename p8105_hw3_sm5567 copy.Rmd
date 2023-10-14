@@ -230,8 +230,7 @@ knitr::kable(education_table, caption = "Number of Men and Women in each Educati
 ```
 
 
-## Plotting age_distribution boxplot.
-
+## Creating a visualization of the age distributions for men and women in each education category.
 ```{r}
 age_distribition_viz =
   ggplot(joined_data, aes(x = education, y = age, fill = sex)) +
@@ -240,12 +239,30 @@ age_distribition_viz =
        x = "Education Level",
        y = "Age") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 40, hjust = 1))
+  theme(axis.text.x = element_text(angle = 40, hjust =1))
 ```
 
 
+Traditional analyses of accelerometer data focus on the total activity over the day. Using your tidied dataset, aggregate across minutes to create a total activity variable for each participant. Plot these total activities (y-axis) against age (x-axis); your plot should compare men to women and have separate panels for each education level. Include a trend line or a smooth to illustrate differences. Comment on your plot.
+## Plotting for the total activities that compare men to women.
 ```{r}
+activity_total =
+joined_data %>%
+  rowwise() %>%
+  mutate(
+    total_activity = sum(c_across(min1:min1440)) %>%
+      as.numeric())
 
+total_activity_plot =
+  ggplot(activity_total, aes(x = age, y = total_activity)) +
+  geom_point(aes(color = sex)) +
+  facet_wrap(~ education) +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  labs(title = "Total Activity by Age, Genderm and Education Level",
+       x = "Age",
+       y = "Total Activity",
+       color = "Gender") +
+  theme_minimal()
 ```
 
 
