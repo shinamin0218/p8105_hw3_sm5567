@@ -255,8 +255,8 @@ knitr::kable(education_table, caption = "Number of Men and Women in each Educati
   * Created a table using the merged data.
   * Grouped the data by education and sex variables.
   * Then to load the table, used `kintr::kable` function.
-  * The table provides the participant distribution based on their education level and gender. It offers insights into the number of participants in each education category, segmented by their gender. There are more females (28) than males (27) in the "Less Than High School Education" category. "High School Equivalent" exhibits a higher representation of males (35) compared to females (23). In the "More Than High School" category, threr are slightly more females (59) than males (56). In the "Less Than High School" category, age distributions are wide for both genders, with a slightly older skew among women. In "High School Equivalent", both genders have broad age distributions, but women's peak age is slightly older. In "More Than High School", women peak at a younger age, indicating earlier completion of higher education comapred to men.
-  
+  *  The table provides the participant distribution based on their education level and gender. It offers insights into the number of participants in each education category, segmented by their gender. There are more females (28) than males (27) in the "Less Than High School Education" category. "High School Equivalent" exhibits a higher representation of males (35) compared to females (23). In the "More Than High School" category, threr are slightly more females (59) than males (56). In the "Less Than High School" category, age distributions are wide for both genders, with a slightly older skew among women. In "High School Equivalent", both genders have broad age distributions, but women's peak age is slightly older. In "More Than High School", women peak at a younger age, indicating earlier completion of higher education comapred to men.
+ 
   
 ## Creating a visualization of the age distributions for men and women in each education category.
 ```{r}
@@ -270,7 +270,7 @@ age_distribition_viz =
   theme(axis.text.x = element_text(angle = 40, hjust =1))
 ```
 
-  * 
+  
 ## Plotting for the total activities that compare men to women.
 ```{r}
 activity_total =
